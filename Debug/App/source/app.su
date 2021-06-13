@@ -1,2 +1,6 @@
 app.c:12:6:setup	4	static
+<<<<<<< HEAD
 app.c:15:6:loop	8	static
+=======
+app.c:15:6:loop	4	static
+>>>>>>> develop

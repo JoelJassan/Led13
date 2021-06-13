@@ -13,6 +13,9 @@ void setup(void){
 
 }
 void loop(void){
+<<<<<<< HEAD
 	HAL_GPIO_TogglePin(Led_GPIO_Port, Led_Pin);
 	HAL_Delay(500);
+=======
+>>>>>>> develop
 }
