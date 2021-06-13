@@ -27,9 +27,10 @@ int Pin_leer(Pin *self);	//puede leer el contenido de la variable
 void Pin_escribir(Pin *self, int estado);
 
 
+
+
 //--------  Pin     -     implementacion -//
 
-//ejecucion de acciones
 void Pin_init(Pin *self, GPIO_TypeDef *puerto, uint16_t pin){
 	self->puerto=puerto;
 	self->pin=pin;
@@ -44,11 +45,20 @@ void Pin_escribir(Pin *self, int estado){
 }	//escritura
 
 
-//----------------------------------------//
-void setup(void){
 
+//----------------------------------------//
+
+//	CONSTRUIR UN OBJETO IMPLICA RESERVAR MEMORIA PARA EL OBJETO Y DARLE UN VALOR INICIAL...
+
+
+static Pin led;	//variable que solo se ve en app.c - creo un objeto que se llama "led"; reservo su espacio de memoria
+
+
+void setup(void){
+	Pin_init(&led, Led_GPIO_Port, Led_Pin);		//inicializo el objeto "led", y se asocia el puerto y pin de Led (corresponde al PC13)
+												//" &led " toma la direccion de la variable "led"
 }
 void loop(void){
-	HAL_GPIO_TogglePin(Led_GPIO_Port, Led_Pin);
+	Pin_escribir(&led, !Pin_leer(&led));	//escribir en "led" lo opuesto que está en "led"
 	HAL_Delay(500);
 }
