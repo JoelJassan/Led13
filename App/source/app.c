@@ -9,8 +9,11 @@
 #include <app.h>
 #include <main.h>
 
-//--------	Pin     -     encabezado -----//
-#include <stdint.h>	//para la definicion de uint16_t
+
+
+//------------------	Pin     -     encabezado (.h) ---------------//
+
+#include <stdint.h>			//para la definicion de uint16_t
 
 typedef struct Pin{
 	GPIO_TypeDef *puerto;
@@ -28,28 +31,35 @@ void Pin_escribir(Pin *self, int estado);
 
 
 
-
-//--------  Pin     -     implementacion -//
-
+//------------------  Pin     -     implementacion (.c) -------------//
+-
 void Pin_init(Pin *self, GPIO_TypeDef *puerto, uint16_t pin){
 	self->puerto=puerto;
 	self->pin=pin;
 }	//asigno los valores de la clase a los parametros de la funcion
 
 int Pin_leer(Pin *self){
-	return HAL_GPIO_ReadPin(self->puerto,self->pin);
-}	//lectura del valor actual
+	return !!(self->puerto->IDR & self->pin);	//&:AND bit a bit ----> de todo el registro IDR selecciona los que esten en 1. La doble negacion solo es para tomar el valor lógico del pin 13
+}
 
 void Pin_escribir(Pin *self, int estado){
-	HAL_GPIO_WritePin(self->puerto, self->pin, estado);
-}	//escritura
+	if (estado != 0) self->puerto->BSRR = self->pin;	//si estado=1 asigno la mascara al Bit Set-Reset
+														//El BSRR es un registro de 32 bits, donde los 16LSB corresponden a la parte SET. Al pin que yo escriba con 1, se pone en 1 (en este caso, el pin 13)
+	else self->puerto->BRR = self->pin;					//EL BRR pone en cero
+}
+
+//-------------------------------------------------------------------//
 
 
 
-//----------------------------------------//
 
 //	CONSTRUIR UN OBJETO IMPLICA RESERVAR MEMORIA PARA EL OBJETO Y DARLE UN VALOR INICIAL...
 
+
+
+
+
+//-------------------funcionamiento del programa---------------------//
 
 static Pin led;	//variable que solo se ve en app.c - creo un objeto que se llama "led"; reservo su espacio de memoria
 
