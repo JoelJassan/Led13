@@ -1,9 +1,5 @@
-App/source/app.o: ../App/source/app.c \
- E:/Facet/Github/CubeIDE/Led13/App/include/app.h ../Core/Inc/main.h \
- ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h \
- ../Core/Inc/stm32f1xx_hal_conf.h \
- ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h \
- ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h \
+App/source/pin.o: ../App/source/pin.c \
+ E:/Facet/Github/CubeIDE/Led13/App/include/pin.h \
  ../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h \
  ../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xb.h \
  ../Drivers/CMSIS/Include/core_cm3.h \
@@ -11,6 +7,10 @@ App/source/app.o: ../App/source/app.c \
  ../Drivers/CMSIS/Include/cmsis_compiler.h \
  ../Drivers/CMSIS/Include/cmsis_gcc.h \
  ../Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h \
+ ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h \
+ ../Core/Inc/stm32f1xx_hal_conf.h \
+ ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h \
+ ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h \
@@ -21,20 +21,9 @@ App/source/app.o: ../App/source/app.c \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h \
- ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h \
- E:/Facet/Github/CubeIDE/Led13/App/include/pin.h
+ ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h
 
-E:/Facet/Github/CubeIDE/Led13/App/include/app.h:
-
-../Core/Inc/main.h:
-
-../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h:
-
-../Core/Inc/stm32f1xx_hal_conf.h:
-
-../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h:
-
-../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h:
+E:/Facet/Github/CubeIDE/Led13/App/include/pin.h:
 
 ../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h:
 
@@ -49,6 +38,14 @@ E:/Facet/Github/CubeIDE/Led13/App/include/app.h:
 ../Drivers/CMSIS/Include/cmsis_gcc.h:
 
 ../Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h:
+
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h:
+
+../Core/Inc/stm32f1xx_hal_conf.h:
+
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h:
+
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h:
 
 ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h:
 
@@ -71,5 +68,3 @@ E:/Facet/Github/CubeIDE/Led13/App/include/app.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h:
 
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h:
-
-E:/Facet/Github/CubeIDE/Led13/App/include/pin.h:

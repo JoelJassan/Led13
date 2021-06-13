@@ -27,23 +27,23 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   ALLOC
  11 .ARM.attributes 00000029  00000000  00000000  0002000c  2**0
                   CONTENTS, READONLY
- 12 .debug_info   000034dd  00000000  00000000  00020035  2**0
+ 12 .debug_info   00003729  00000000  00000000  00020035  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 13 .debug_abbrev 00001127  00000000  00000000  00023512  2**0
+ 13 .debug_abbrev 00001250  00000000  00000000  0002375e  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 14 .debug_aranges 00000428  00000000  00000000  00024640  2**3
+ 14 .debug_aranges 00000440  00000000  00000000  000249b0  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 15 .debug_ranges 00000380  00000000  00000000  00024a68  2**3
+ 15 .debug_ranges 00000388  00000000  00000000  00024df0  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 16 .debug_macro  00015c4e  00000000  00000000  00024de8  2**0
+ 16 .debug_macro  00015de6  00000000  00000000  00025178  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_line   0000520c  00000000  00000000  0003aa36  2**0
+ 17 .debug_line   00005841  00000000  00000000  0003af5e  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_str    0007bada  00000000  00000000  0003fc42  2**0
+ 18 .debug_str    0007bafe  00000000  00000000  0004079f  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .comment      00000053  00000000  00000000  000bb71c  2**0
+ 19 .comment      00000053  00000000  00000000  000bc29d  2**0
                   CONTENTS, READONLY
- 20 .debug_frame  00000e00  00000000  00000000  000bb770  2**2
+ 20 .debug_frame  00000e10  00000000  00000000  000bc2f0  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -76,140 +76,140 @@ Disassembly of section .text:
  8000144:	20000010 	.word	0x20000010
  8000148:	080012d4 	.word	0x080012d4
 
-0800014c <Pin_init>:
+0800014c <setup>:
 
-
-
-//--------  Pin     -     implementacion -//
-
-void Pin_init(Pin *self, GPIO_TypeDef *puerto, uint16_t pin){
- 800014c:	b480      	push	{r7}
- 800014e:	b085      	sub	sp, #20
- 8000150:	af00      	add	r7, sp, #0
- 8000152:	60f8      	str	r0, [r7, #12]
- 8000154:	60b9      	str	r1, [r7, #8]
- 8000156:	4613      	mov	r3, r2
- 8000158:	80fb      	strh	r3, [r7, #6]
-	self->puerto=puerto;
- 800015a:	68fb      	ldr	r3, [r7, #12]
- 800015c:	68ba      	ldr	r2, [r7, #8]
- 800015e:	601a      	str	r2, [r3, #0]
-	self->pin=pin;
- 8000160:	68fb      	ldr	r3, [r7, #12]
- 8000162:	88fa      	ldrh	r2, [r7, #6]
- 8000164:	809a      	strh	r2, [r3, #4]
-}	//asigno los valores de la clase a los parametros de la funcion
- 8000166:	bf00      	nop
- 8000168:	3714      	adds	r7, #20
- 800016a:	46bd      	mov	sp, r7
- 800016c:	bc80      	pop	{r7}
- 800016e:	4770      	bx	lr
-
-08000170 <Pin_leer>:
-
-int Pin_leer(Pin *self){
- 8000170:	b480      	push	{r7}
- 8000172:	b083      	sub	sp, #12
- 8000174:	af00      	add	r7, sp, #0
- 8000176:	6078      	str	r0, [r7, #4]
-	return !!(self->puerto->IDR & self->pin);	//&:AND bit a bit ----> de todo el registro IDR selecciona los que esten en 1. La doble negacion solo es para tomar el valor lógico del pin 13
- 8000178:	687b      	ldr	r3, [r7, #4]
- 800017a:	681b      	ldr	r3, [r3, #0]
- 800017c:	689b      	ldr	r3, [r3, #8]
- 800017e:	687a      	ldr	r2, [r7, #4]
- 8000180:	8892      	ldrh	r2, [r2, #4]
- 8000182:	4013      	ands	r3, r2
- 8000184:	2b00      	cmp	r3, #0
- 8000186:	bf14      	ite	ne
- 8000188:	2301      	movne	r3, #1
- 800018a:	2300      	moveq	r3, #0
- 800018c:	b2db      	uxtb	r3, r3
-}
- 800018e:	4618      	mov	r0, r3
- 8000190:	370c      	adds	r7, #12
- 8000192:	46bd      	mov	sp, r7
- 8000194:	bc80      	pop	{r7}
- 8000196:	4770      	bx	lr
-
-08000198 <Pin_escribir>:
-
-void Pin_escribir(Pin *self, int estado){
- 8000198:	b480      	push	{r7}
- 800019a:	b083      	sub	sp, #12
- 800019c:	af00      	add	r7, sp, #0
- 800019e:	6078      	str	r0, [r7, #4]
- 80001a0:	6039      	str	r1, [r7, #0]
-	if (estado != 0) self->puerto->BSRR = self->pin;	//si estado=1 asigno la mascara al Bit Set-Reset
- 80001a2:	683b      	ldr	r3, [r7, #0]
- 80001a4:	2b00      	cmp	r3, #0
- 80001a6:	d005      	beq.n	80001b4 <Pin_escribir+0x1c>
- 80001a8:	687b      	ldr	r3, [r7, #4]
- 80001aa:	889a      	ldrh	r2, [r3, #4]
- 80001ac:	687b      	ldr	r3, [r7, #4]
- 80001ae:	681b      	ldr	r3, [r3, #0]
- 80001b0:	611a      	str	r2, [r3, #16]
-												//El BSRR es un registro de 32 bits, donde los 16LSB corresponden a la parte SET. Al pin que yo escriba con 1, se pone en 1 (en este caso, el pin 13)
-	else self->puerto->BRR = self->pin;					//EL BRR pone en cero
-}
- 80001b2:	e004      	b.n	80001be <Pin_escribir+0x26>
-	else self->puerto->BRR = self->pin;					//EL BRR pone en cero
- 80001b4:	687b      	ldr	r3, [r7, #4]
- 80001b6:	889a      	ldrh	r2, [r3, #4]
- 80001b8:	687b      	ldr	r3, [r7, #4]
- 80001ba:	681b      	ldr	r3, [r3, #0]
- 80001bc:	615a      	str	r2, [r3, #20]
-}
- 80001be:	bf00      	nop
- 80001c0:	370c      	adds	r7, #12
- 80001c2:	46bd      	mov	sp, r7
- 80001c4:	bc80      	pop	{r7}
- 80001c6:	4770      	bx	lr
-
-080001c8 <setup>:
-
+//-------------------funcionamiento del programa---------------------//
 
 static Pin led;	//variable que solo se ve en app.c - creo un objeto que se llama "led"; reservo su espacio de memoria
 
-
 void setup(void){
- 80001c8:	b580      	push	{r7, lr}
- 80001ca:	af00      	add	r7, sp, #0
+ 800014c:	b580      	push	{r7, lr}
+ 800014e:	af00      	add	r7, sp, #0
 	Pin_init(&led, Led_GPIO_Port, Led_Pin);		//inicializo el objeto "led", y se asocia el puerto y pin de Led (corresponde al PC13)
- 80001cc:	f44f 5200 	mov.w	r2, #8192	; 0x2000
- 80001d0:	4902      	ldr	r1, [pc, #8]	; (80001dc <setup+0x14>)
- 80001d2:	4803      	ldr	r0, [pc, #12]	; (80001e0 <setup+0x18>)
- 80001d4:	f7ff ffba 	bl	800014c <Pin_init>
+ 8000150:	f44f 5200 	mov.w	r2, #8192	; 0x2000
+ 8000154:	4902      	ldr	r1, [pc, #8]	; (8000160 <setup+0x14>)
+ 8000156:	4803      	ldr	r0, [pc, #12]	; (8000164 <setup+0x18>)
+ 8000158:	f000 f81e 	bl	8000198 <Pin_init>
 												//" &led " toma la direccion de la variable "led"
 }
- 80001d8:	bf00      	nop
- 80001da:	bd80      	pop	{r7, pc}
- 80001dc:	40011000 	.word	0x40011000
- 80001e0:	20000028 	.word	0x20000028
+ 800015c:	bf00      	nop
+ 800015e:	bd80      	pop	{r7, pc}
+ 8000160:	40011000 	.word	0x40011000
+ 8000164:	20000028 	.word	0x20000028
 
-080001e4 <loop>:
+08000168 <loop>:
 void loop(void){
- 80001e4:	b580      	push	{r7, lr}
- 80001e6:	af00      	add	r7, sp, #0
+ 8000168:	b580      	push	{r7, lr}
+ 800016a:	af00      	add	r7, sp, #0
 	Pin_escribir(&led, !Pin_leer(&led));	//escribir en "led" lo opuesto que está en "led"
- 80001e8:	4809      	ldr	r0, [pc, #36]	; (8000210 <loop+0x2c>)
- 80001ea:	f7ff ffc1 	bl	8000170 <Pin_leer>
- 80001ee:	4603      	mov	r3, r0
- 80001f0:	2b00      	cmp	r3, #0
- 80001f2:	bf0c      	ite	eq
- 80001f4:	2301      	moveq	r3, #1
- 80001f6:	2300      	movne	r3, #0
- 80001f8:	b2db      	uxtb	r3, r3
- 80001fa:	4619      	mov	r1, r3
- 80001fc:	4804      	ldr	r0, [pc, #16]	; (8000210 <loop+0x2c>)
- 80001fe:	f7ff ffcb 	bl	8000198 <Pin_escribir>
+ 800016c:	4809      	ldr	r0, [pc, #36]	; (8000194 <loop+0x2c>)
+ 800016e:	f000 f825 	bl	80001bc <Pin_leer>
+ 8000172:	4603      	mov	r3, r0
+ 8000174:	2b00      	cmp	r3, #0
+ 8000176:	bf0c      	ite	eq
+ 8000178:	2301      	moveq	r3, #1
+ 800017a:	2300      	movne	r3, #0
+ 800017c:	b2db      	uxtb	r3, r3
+ 800017e:	4619      	mov	r1, r3
+ 8000180:	4804      	ldr	r0, [pc, #16]	; (8000194 <loop+0x2c>)
+ 8000182:	f000 f82f 	bl	80001e4 <Pin_escribir>
 	HAL_Delay(500);
- 8000202:	f44f 70fa 	mov.w	r0, #500	; 0x1f4
- 8000206:	f000 f9ad 	bl	8000564 <HAL_Delay>
+ 8000186:	f44f 70fa 	mov.w	r0, #500	; 0x1f4
+ 800018a:	f000 f9eb 	bl	8000564 <HAL_Delay>
+}
+ 800018e:	bf00      	nop
+ 8000190:	bd80      	pop	{r7, pc}
+ 8000192:	bf00      	nop
+ 8000194:	20000028 	.word	0x20000028
+
+08000198 <Pin_init>:
+
+//------------------  Pin     -     implementacion (.c) -------------//
+
+#include <pin.h>
+
+void Pin_init(Pin *self, GPIO_TypeDef *puerto, uint16_t pin){
+ 8000198:	b480      	push	{r7}
+ 800019a:	b085      	sub	sp, #20
+ 800019c:	af00      	add	r7, sp, #0
+ 800019e:	60f8      	str	r0, [r7, #12]
+ 80001a0:	60b9      	str	r1, [r7, #8]
+ 80001a2:	4613      	mov	r3, r2
+ 80001a4:	80fb      	strh	r3, [r7, #6]
+	self->puerto=puerto;
+ 80001a6:	68fb      	ldr	r3, [r7, #12]
+ 80001a8:	68ba      	ldr	r2, [r7, #8]
+ 80001aa:	601a      	str	r2, [r3, #0]
+	self->pin=pin;
+ 80001ac:	68fb      	ldr	r3, [r7, #12]
+ 80001ae:	88fa      	ldrh	r2, [r7, #6]
+ 80001b0:	809a      	strh	r2, [r3, #4]
+}	//asigno los valores de la clase a los parametros de la funcion
+ 80001b2:	bf00      	nop
+ 80001b4:	3714      	adds	r7, #20
+ 80001b6:	46bd      	mov	sp, r7
+ 80001b8:	bc80      	pop	{r7}
+ 80001ba:	4770      	bx	lr
+
+080001bc <Pin_leer>:
+
+int Pin_leer(Pin *self){
+ 80001bc:	b480      	push	{r7}
+ 80001be:	b083      	sub	sp, #12
+ 80001c0:	af00      	add	r7, sp, #0
+ 80001c2:	6078      	str	r0, [r7, #4]
+	return !!(self->puerto->IDR & self->pin);	//&:AND bit a bit ----> de todo el registro IDR selecciona los que esten en 1. La doble negacion solo es para tomar el valor lógico del pin 13
+ 80001c4:	687b      	ldr	r3, [r7, #4]
+ 80001c6:	681b      	ldr	r3, [r3, #0]
+ 80001c8:	689b      	ldr	r3, [r3, #8]
+ 80001ca:	687a      	ldr	r2, [r7, #4]
+ 80001cc:	8892      	ldrh	r2, [r2, #4]
+ 80001ce:	4013      	ands	r3, r2
+ 80001d0:	2b00      	cmp	r3, #0
+ 80001d2:	bf14      	ite	ne
+ 80001d4:	2301      	movne	r3, #1
+ 80001d6:	2300      	moveq	r3, #0
+ 80001d8:	b2db      	uxtb	r3, r3
+}
+ 80001da:	4618      	mov	r0, r3
+ 80001dc:	370c      	adds	r7, #12
+ 80001de:	46bd      	mov	sp, r7
+ 80001e0:	bc80      	pop	{r7}
+ 80001e2:	4770      	bx	lr
+
+080001e4 <Pin_escribir>:
+
+void Pin_escribir(Pin *self, int estado){
+ 80001e4:	b480      	push	{r7}
+ 80001e6:	b083      	sub	sp, #12
+ 80001e8:	af00      	add	r7, sp, #0
+ 80001ea:	6078      	str	r0, [r7, #4]
+ 80001ec:	6039      	str	r1, [r7, #0]
+	if (estado != 0) self->puerto->BSRR = self->pin;	//si estado=1 asigno la mascara al Bit Set-Reset
+ 80001ee:	683b      	ldr	r3, [r7, #0]
+ 80001f0:	2b00      	cmp	r3, #0
+ 80001f2:	d005      	beq.n	8000200 <Pin_escribir+0x1c>
+ 80001f4:	687b      	ldr	r3, [r7, #4]
+ 80001f6:	889a      	ldrh	r2, [r3, #4]
+ 80001f8:	687b      	ldr	r3, [r7, #4]
+ 80001fa:	681b      	ldr	r3, [r3, #0]
+ 80001fc:	611a      	str	r2, [r3, #16]
+														//El BSRR es un registro de 32 bits, donde los 16LSB corresponden a la parte SET. Al pin que yo escriba con 1, se pone en 1 (en este caso, el pin 13)
+	else self->puerto->BRR = self->pin;					//EL BRR pone en cero
+}
+ 80001fe:	e004      	b.n	800020a <Pin_escribir+0x26>
+	else self->puerto->BRR = self->pin;					//EL BRR pone en cero
+ 8000200:	687b      	ldr	r3, [r7, #4]
+ 8000202:	889a      	ldrh	r2, [r3, #4]
+ 8000204:	687b      	ldr	r3, [r7, #4]
+ 8000206:	681b      	ldr	r3, [r3, #0]
+ 8000208:	615a      	str	r2, [r3, #20]
 }
  800020a:	bf00      	nop
- 800020c:	bd80      	pop	{r7, pc}
- 800020e:	bf00      	nop
- 8000210:	20000028 	.word	0x20000028
+ 800020c:	370c      	adds	r7, #12
+ 800020e:	46bd      	mov	sp, r7
+ 8000210:	bc80      	pop	{r7}
+ 8000212:	4770      	bx	lr
 
 08000214 <MX_GPIO_Init>:
         * EXTI
@@ -383,14 +383,14 @@ int main(void)
  8000304:	f7ff ff86 	bl	8000214 <MX_GPIO_Init>
   /* USER CODE BEGIN 2 */
   setup();
- 8000308:	f7ff ff5e 	bl	80001c8 <setup>
+ 8000308:	f7ff ff20 	bl	800014c <setup>
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
 	  loop();
- 800030c:	f7ff ff6a 	bl	80001e4 <loop>
+ 800030c:	f7ff ff2c 	bl	8000168 <loop>
  8000310:	e7fc      	b.n	800030c <main+0x14>
 
 08000312 <SystemClock_Config>:
