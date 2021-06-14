@@ -1,5 +1,5 @@
-App/source/app.o: ../App/source/app.c \
- E:/Facet/Github/CubeIDE/Led13/App/include/app.h ../Core/Inc/main.h \
+App/source/timer_sys.o: ../App/source/timer_sys.c \
+ E:/Facet/Github/CubeIDE/Led13/App/include/timer_sys.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h \
  ../Core/Inc/stm32f1xx_hal_conf.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h \
@@ -21,13 +21,9 @@ App/source/app.o: ../App/source/app.c \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h \
- ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h \
- E:/Facet/Github/CubeIDE/Led13/App/include/pin.h \
- E:/Facet/Github/CubeIDE/Led13/App/include/timer_sys.h
+ ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h
 
-E:/Facet/Github/CubeIDE/Led13/App/include/app.h:
-
-../Core/Inc/main.h:
+E:/Facet/Github/CubeIDE/Led13/App/include/timer_sys.h:
 
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h:
 
@@ -72,7 +68,3 @@ E:/Facet/Github/CubeIDE/Led13/App/include/app.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h:
 
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h:
-
-E:/Facet/Github/CubeIDE/Led13/App/include/pin.h:
-
-E:/Facet/Github/CubeIDE/Led13/App/include/timer_sys.h:

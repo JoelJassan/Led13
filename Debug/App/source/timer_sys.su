@@ -1,0 +1,5 @@
+timer_sys.c:12:6:TimerSys_init	16	static
+timer_sys.c:17:6:TimerSys_estableceTiempo	16	static
+timer_sys.c:24:5:TimerSys_tiempocumplido	16	static
+timer_sys.c:28:6:TimerSys_esperaTiempoCumplido	16	static
+timer_sys.c:32:6:TimerSys_delay	16	static
