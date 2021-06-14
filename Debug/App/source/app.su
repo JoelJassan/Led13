@@ -1,4 +1,4 @@
-app.c:31:6:TimerSys_init	16	static
-app.c:34:6:TimerSys_delay	16	static
-app.c:46:6:setup	8	static
-app.c:51:6:loop	16	static
+app.c:32:6:TimerSys_init	16	static
+app.c:36:6:TimerSys_delay	16	static
+app.c:53:6:setup	8	static
+app.c:58:6:loop	16	static

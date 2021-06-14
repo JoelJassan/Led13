@@ -20,7 +20,8 @@
 
 //----------------TimerSys     -     encabezado (.h)-----------------//
 typedef struct TimerSys{
-	int relleno; //agrego y dsps borro. Solo es para que el compilador no se queje
+	uint32_t cuentaInicial;
+	uint32_t retardo;
 }TimerSys;
 
 void TimerSys_init (TimerSys *self);
@@ -29,11 +30,17 @@ void TimerSys_delay(TimerSys *self, uint32_t tiempo_ms);
 //--------------TimerSys     -     implementacion (.c)---------------//
 
 void TimerSys_init (TimerSys *self){
-	self->relleno=0;	//doy un valor cualquiera. Dsps cambio
+	self->cuentaInicial = HAL_GetTick();
+	self->retardo = 0;
 }
 void TimerSys_delay(TimerSys *self, uint32_t tiempo_ms){
-	(void)self;	//por ahora no lo uso
-	HAL_Delay(tiempo_ms);
+	self->cuentaInicial = HAL_GetTick();
+
+	if(tiempo_ms > 0 && tiempo_ms < UINT32_MAX) self->retardo = tiempo_ms + 1;
+	else self->retardo = tiempo_ms;
+
+
+	while( (HAL_GetTick() - self->cuentaInicial) < self->retardo);
 }
 
 
